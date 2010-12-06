@@ -1,0 +1,6 @@
+bin/*
+gen/*
+stuff/*
+.settings/*
+res/*
+

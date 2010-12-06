@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+	package="br.com.bott.droidsshd"
+	android:versionCode="5"
+	android:versionName="0.5" 
+	android:installLocation="auto">
+
+	<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+	<uses-permission android:name="android.permission.WAKE_LOCK" />
+	<uses-permission android:name="android.permission.INTERNET" />
+	<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+	<uses-permission android:name="android.permission.VIBRATE" />
+	<uses-permission android:name="android.permission.PERSISTENT_ACTIVITY" />
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+<!--	<uses-permission android:name="android.permission.READ_PHONE_STATE" />-->
+
+
+	<application android:icon="@drawable/ssh_icon"
+		android:label="@string/app_label"
+		android:persistent="true">
+		<service 
+			android:name="br.com.bott.droidsshd.system.DroidSSHdService">
+			<intent-filter>
+				<action
+					android:name="br.com.bott.droidsshd.system.DroidSSHdService">
+				</action>
+			</intent-filter>
+		</service>
+		<activity 
+			android:name="br.com.bott.droidsshd.DroidSSHd">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.LAUNCHER" />
+			</intent-filter>
+        </activity>
+		<activity android:name="br.com.bott.droidsshd.activity.Preferences"/>
+		<activity android:name="br.com.bott.droidsshd.activity.InitialSetup"/>
+		<activity android:name="com.h3r3t1c.filechooser.FileChooser">
+			<intent-filter>
+				<action android:name="br.com.bott.droidsshd.AUTHORIZED_KEYS"/>
+				<category android:name="android.intent.category.DEFAULT" />
+			</intent-filter>
+		</activity>
+	    <receiver android:name="br.com.bott.droidsshd.system.BootReceiver">
+    		<intent-filter>
+	    		<action android:name="android.intent.action.BOOT_COMPLETED" />
+	    		<category android:name="android.intent.category.HOME" />
+			</intent-filter>
+		</receiver>
+
+</application>
+    <uses-sdk android:minSdkVersion="7" android:targetSdkVersion="8"/>
+</manifest>
+
+
+<!--	<permission android:name="android.permission.PERSISTENT_ACTIVITY" />-->
+<!---->
