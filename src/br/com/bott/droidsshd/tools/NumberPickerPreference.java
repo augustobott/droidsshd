@@ -43,8 +43,6 @@ public class NumberPickerPreference extends DialogPreference {
 //		Log.d(TAG, "which: " + which);
 		switch (which) {
 		case DialogInterface.BUTTON_POSITIVE:
-//			NumberPicker picker = (NumberPicker) getDialog().findViewById(R.id.pref_num_picker);
-//			picker = (NumberPicker) getDialog().findViewById(R.id.pref_num_picker);
 			picker.onClick(null);
 			saveValue(picker.getCurrent());
 			break;
@@ -60,6 +58,8 @@ public class NumberPickerPreference extends DialogPreference {
 	}
 	
 	public int getValue() {
+		// TODO - store that on preference/string/whatever 
+		// TODO - (as long as it's the same as everything else)
 		return getSharedPreferences().getInt("dropbear_port", 2222);
 	}
 }

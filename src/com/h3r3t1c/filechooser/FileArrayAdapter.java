@@ -55,7 +55,6 @@ public class FileArrayAdapter extends ArrayAdapter<Option>{
 			if(t2!=null) {
 				t2.setText(o.getData());
 				if (o.getData().equalsIgnoreCase("folder")) {
-//					i.setImageResource(R.drawable.folder);
 					i.setImageResource(R.drawable.directory_icon);
 //					i.setVisibility(View.VISIBLE);
 				} else {

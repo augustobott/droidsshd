@@ -192,6 +192,8 @@ public class Base {
 	}
 
 /*	public static File getHomeDir() {
+	// TODO - move it out of dropbearmulti 
+	// TODO - (currently, it's statically compiled to be /mnt/sdcard)
 		return homeDir;
 	}
 */

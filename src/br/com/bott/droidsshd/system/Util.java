@@ -289,7 +289,8 @@ public class Util {
 	
 	return 0;
 }*/
-	public static void mysleep(int ms) {
+
+/*	public static void mysleep(int ms) {
 		try {
 			Thread.sleep(ms);
 		} catch (InterruptedException e) {
@@ -297,6 +298,7 @@ public class Util {
 			e.printStackTrace();
 		}
 	}
+*/
 
 	synchronized public static void takeWakeLock() {
 		if(wakeLock == null) {
@@ -323,8 +325,6 @@ public class Util {
 			}
 		}*/
 	}
-
-//	http://code.google.com/p/swiftp/source/browse/#svn/trunk/src/org/swiftp
 
 	synchronized public static void takeWifiLock() {
 		if(wifiLock == null) {
