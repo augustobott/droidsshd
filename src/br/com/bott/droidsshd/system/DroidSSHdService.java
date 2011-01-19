@@ -25,6 +25,9 @@ import android.util.Log;
  */
 public class DroidSSHdService extends Service{ 
 
+//	TODO - investigate about Service#startForeground();
+//	http://developer.android.com/reference/android/app/Service.html#startForeground%28int,%20android.app.Notification%29
+
 	private static final String TAG = "DroidSSHdService";
 
 	private static NotificationManager mNotificationManager;
@@ -144,8 +147,9 @@ public class DroidSSHdService extends Service{
 						if (debug) {
 							Log.v(tag, "cmd = '" + cmd + "'");
 						}
-	//					cmd("export HOME=/mnt/sdcard");
-	//					cmd("cd $HOME");
+//						TODO - currently, HOME is hard-coded on dropbearmulti
+//						cmd("export HOME=/mnt/sdcard");
+//						cmd("cd $HOME");
 						cmd(cmd);
 					}
 					@Override
@@ -174,6 +178,8 @@ public class DroidSSHdService extends Service{
 	}
 
 	private FileObserver createPidWatchdog(String path,int mask) {
+//		TODO - perhaps move this object to Util and make it static
+//		since we shall have at most one FileObserver active at any time 
 		FileObserver observer = new FileObserver(path, mask) {
 			@Override
 			public void onEvent(int event, String path) {

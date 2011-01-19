@@ -3,8 +3,6 @@
  */
 package br.com.bott.droidsshd.system;
 
-//import br.com.bott.droidsshd.lixo.MonitoringService;
-//import br.com.bott.droidsshd.R;
 import java.io.File;
 
 import android.content.BroadcastReceiver;
@@ -14,19 +12,11 @@ import android.content.Intent;
 //import android.preference.PreferenceManager;
 import android.util.Log;
 
-/*
-import android.app.AlarmManager;
-import android.app.PendingIntent;
-import android.os.SystemClock;
-import android.preference.PreferenceManager;
-*/
-
 /**
  * Receives a broadcast message when the device completes 
  * booting/starting up and checks if anything needs to be 
- * done. Also used to manually start/stop monitoring services 
- * and alarms.  
- *
+ * done. 
+ * 
  * @author mestre
  *
  */
@@ -54,7 +44,7 @@ public class BootReceiver extends BroadcastReceiver {
 				if (Base.debug) {
 					Log.d(TAG, "Removing stale PID file");
 				}
-//				Util.doRun("rm " + Base.getDropbearPidFilePath(), Base.runDaemonAsRoot(), null);
+//				remove our stale PID file as root (just in case), no output handler (null)
 				Util.doRun("rm " + Base.getDropbearPidFilePath(), true, null);
 			}
 
@@ -72,33 +62,7 @@ public class BootReceiver extends BroadcastReceiver {
 				}
 			}
 		}
-//			startAlarm(context);
 	}
-
-/*	private static AlarmManager mgr;
-	private static PendingIntent pi = null;
-
-	
-
-	public static void cancelAlarm(){
-			if (mgr != null) {
-					mgr.cancel(pi);
-			}
-	}
-	
-	public static void startAlarm(Context context){
-			AlarmSettings settings = Preferences.ReadAlarmSettings(PreferenceManager.getDefaultSharedPreferences(context));
-			
-			if (settings.isAlarmEnabled()) {
-					// Set up PendingIntent for the alarm service
-					mgr = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
-					Intent i = new Intent(context, AlarmReceiver.class);
-					pi = PendingIntent.getBroadcast(context, 0, i, 0);
-					// First intent after a small (2 second) delay and repeat at the user-set intervals
-					mgr.setRepeating(AlarmManager.ELAPSED_REALTIME, SystemClock.elapsedRealtime() + 2000, settings.getAlarmIntervalInMilliseconds(), pi);
-			}
-	}
-*/
 }
 
 	   
