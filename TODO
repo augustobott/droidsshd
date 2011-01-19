@@ -1,0 +1,35 @@
+TODO
+
+DroidSSHdService
+------------
+
+- createPidWatchdog() - perhaps move FileObserver to Util and make it a single/static object (on Base) to the whole app (specially since we shall have at most one FileObserver active at any time). handleStop() and others need to be checked as well.
+
+- startDropbear - think about improved/better way of handling std in/out/err on the shell/session/process responsible for firing up dropbear (possibly re-enable/implement sending output to a log/debug/activiy scrollview)
+
+- investigate about using Service startForeground(int, notification);
+
+InitialSetup
+------------
+
+- handle screen orientation changes and other config changes (i.e. HW phys keyboard shown/hidden) so our activity doesn't get restarted automagically (which is potentially a mess to clean up)
+
+- check about dropbear binaries/symlinks and non-rooted ROMs (i.e. check scp)
+
+Dropbear
+------------
+
+- implement/deploy SFTP solution/support
+
+- investigate alternatives to compile smaller binaries (i.e. link against uClibc? bionic?)
+
+Preferences
+------------
+
+- pick defaults from XML instead of hardcode defaulf values (NumberPickerPreference, Base)
+
+- implement 'hidden' preferences: have we run at least once? version of the app? daemon needs to be restarted due to pertinent config changes? basic/initial setup done? status of daemon (to persist across boots?)
+
+
+
+
