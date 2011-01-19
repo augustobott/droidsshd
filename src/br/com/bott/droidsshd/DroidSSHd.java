@@ -80,48 +80,27 @@ public class DroidSSHd extends Activity {
 		}
 	}
 
+	@Override
+	protected void onStart() {
+		super.onStart();
+		doBindDaemonHandlerService(mDropbearDaemonHandlerService);
+	}
 	
-	// DAEMON HANDLER
-	private ServiceConnection mDaemonHandlerConnection = new ServiceConnection() {
-		@Override
-		public void onServiceConnected(ComponentName className, IBinder service) {
-			mBoundDaemonHandlerService = ((br.com.bott.droidsshd.system.DroidSSHdService.DropbearDaemonHandlerBinder)service).getService();
-			if(Base.debug) {
-				Log.d(TAG, "onServiceConnected DroidSSHdService called");
-				if (mBoundDaemonHandlerService==null){
-					Log.d(TAG, "Failed to bind to DroidSSHdService (mBoundDaemonHandlerService is NULL)");
-				} else {
-					Log.d(TAG, "mBoundDaemonHandlerService = " + mBoundDaemonHandlerService.toString());
-				}
-			}
-		}
-		@Override
-		public void onServiceDisconnected(ComponentName className) {
-			mBoundDaemonHandlerService = null;
-			if(Base.debug) {
-				Log.d(TAG, "onServiceDisconnected called (mBoundDaemonHandlerService set to NULL)");
-			}
-		}
-	};
-
-	private void doBindDaemonHandlerService(Intent intent) {
-		mDaemonHandlerIsBound = bindService(intent, mDaemonHandlerConnection, Context.BIND_AUTO_CREATE);
-	}
-
-	private void doUnbindDaemonHandlerService(Intent intent) {
-		if (mDaemonHandlerIsBound) {
-			unbindService(mDaemonHandlerConnection);
-			mDaemonHandlerIsBound = false;
+	@Override
+	protected void onResume() {
+		super.onResume();
+		Base.refresh();
+		mHandler.postDelayed(mUpdateUI, mUpdateUIdelay);
+//		updateStatus();
+		if(Base.debug) {
+			Log.d(TAG, "onResume() called");
 		}
 	}
 
-
-	protected void startInitialSetupActivity() {
-		Util.showMsg("Initial/basic setup required");
-		Intent setup = new Intent(this, br.com.bott.droidsshd.activity.InitialSetup.class);
-		setup.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-//		setup.addFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
-		startActivityForResult(setup, R.string.activity_initial_setup);
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		doUnbindDaemonHandlerService(mDropbearDaemonHandlerService);
 	}
 
 	@Override
@@ -148,6 +127,14 @@ public class DroidSSHd extends Activity {
 				}
 			}
 		}*/
+	}
+
+	protected void startInitialSetupActivity() {
+		Util.showMsg("Initial/basic setup required");
+		Intent setup = new Intent(this, br.com.bott.droidsshd.activity.InitialSetup.class);
+		setup.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+//		setup.addFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
+		startActivityForResult(setup, R.string.activity_initial_setup);
 	}
 
 	protected void setUpUiListeners() {
@@ -198,29 +185,6 @@ public class DroidSSHd extends Activity {
 				startActivity(p);
 			}
 		});
-	}
-
-	@Override
-	protected void onStart() {
-		super.onStart();
-		doBindDaemonHandlerService(mDropbearDaemonHandlerService);
-	}
-	
-	@Override
-	protected void onStop() {
-		super.onStop();
-		doUnbindDaemonHandlerService(mDropbearDaemonHandlerService);
-	}
-
-	@Override
-	protected void onResume() {
-		super.onResume();
-		Base.refresh();
-		mHandler.postDelayed(mUpdateUI, mUpdateUIdelay);
-//		updateStatus();
-		if(Base.debug) {
-			Log.d(TAG, "onResume() called");
-		}
 	}
 
 	public void updateStatus() {
@@ -400,7 +364,8 @@ public class DroidSSHd extends Activity {
 		}
 	}
 	
-/*	final protected Handler mLogviewHandler = new Handler() {
+/*	
+ 	final protected Handler mLogviewHandler = new Handler() {
 		@Override
 		public void handleMessage(Message msg){
 //			mStdOut.append(msg.getData().getString("line"));
@@ -412,6 +377,40 @@ public class DroidSSHd extends Activity {
 		}
 	};
 */
+
+	// DAEMON HANDLER
+	private ServiceConnection mDaemonHandlerConnection = new ServiceConnection() {
+		@Override
+		public void onServiceConnected(ComponentName className, IBinder service) {
+			mBoundDaemonHandlerService = ((br.com.bott.droidsshd.system.DroidSSHdService.DropbearDaemonHandlerBinder)service).getService();
+			if(Base.debug) {
+				Log.d(TAG, "onServiceConnected DroidSSHdService called");
+				if (mBoundDaemonHandlerService==null){
+					Log.d(TAG, "Failed to bind to DroidSSHdService (mBoundDaemonHandlerService is NULL)");
+				} else {
+					Log.d(TAG, "mBoundDaemonHandlerService = " + mBoundDaemonHandlerService.toString());
+				}
+			}
+		}
+		@Override
+		public void onServiceDisconnected(ComponentName className) {
+			mBoundDaemonHandlerService = null;
+			if(Base.debug) {
+				Log.d(TAG, "onServiceDisconnected called (mBoundDaemonHandlerService set to NULL)");
+			}
+		}
+	};
+
+	private void doBindDaemonHandlerService(Intent intent) {
+		mDaemonHandlerIsBound = bindService(intent, mDaemonHandlerConnection, Context.BIND_AUTO_CREATE);
+	}
+
+	private void doUnbindDaemonHandlerService(Intent intent) {
+		if (mDaemonHandlerIsBound) {
+			unbindService(mDaemonHandlerConnection);
+			mDaemonHandlerIsBound = false;
+		}
+	}
 
 }
 
