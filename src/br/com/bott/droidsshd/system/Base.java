@@ -24,8 +24,8 @@ public class Base {
 	
 	public static final String THIS_PACKAGE_NAME = "br.com.bott.droidsshd";
 	
-	public static final String SU_BIN = "/system/xbin/su";
-	public static final String SH_BIN = "/system/bin/sh";
+//	public static final String SU_BIN = "/system/xbin/su";
+//	public static final String SH_BIN = "/system/bin/sh";
 
 	public static final String DROPBEAR_DIR_KEY = "etc";
 	public static final String DROPBEAR_DIR_TMP = "run";
@@ -77,6 +77,9 @@ public class Base {
 	protected static String dropbearBinDir;
 	protected static String dropbearPidFile;
 	
+	protected static String pathToSuBinary;
+	protected static String pathToShBinary;
+	
 	protected static int dropbearDaemonStatus = DAEMON_STATUS_UNKNOWN;
 
 
@@ -112,6 +115,14 @@ public class Base {
 //		}
 	}
 	
+	public static String getPathToSuBinary() {
+		return pathToSuBinary;
+	}
+
+	public static String getPathToShBinary() {
+		return pathToShBinary;
+	}
+
 	public static boolean shouldAcquireWakeLock(){
 		return wakeLock;
 	}
@@ -255,6 +266,8 @@ public class Base {
 			password = sp.getString(context.getString(R.string.pref_dropbear_auth_password_key), "password");
 			runDaemonAsRoot = sp.getBoolean(context.getString(R.string.pref_dropbear_as_root_key),false);
 //			username = sp.getString(context.getString(R.string.pref_dropbear_auth_username_key), "android");
+			pathToSuBinary = sp.getString(context.getString(R.string.pref_path_to_su_key), "/system/xbin/su");
+			pathToShBinary = sp.getString(context.getString(R.string.pref_path_to_sh_key), "/system/bin/sh");
 			if(runDaemonAsRoot) {
 				username="root";
 			} else {

@@ -88,14 +88,12 @@ public class ShellSession extends Thread {
 				if (debug) {
 					Log.d(tag, "Starting new ROOT shell");
 				}
-				process = Runtime.getRuntime().exec(Base.SU_BIN);
-//				process = Runtime.getRuntime().exec(Base.SU_BIN, null, new File("/sdcard"));
+				process = Runtime.getRuntime().exec(Base.getPathToSuBinary());
 			} else {
 				if (debug) {
 					Log.d(tag, "Starting new shell");
 				}
-				process = Runtime.getRuntime().exec(Base.SH_BIN);
-//				process = Runtime.getRuntime().exec(Base.SH_BIN, null, new File("/sdcard"));
+				process = Runtime.getRuntime().exec(Base.getPathToShBinary());
 			}
 			
 			stdin = new PrintStream(process.getOutputStream());
