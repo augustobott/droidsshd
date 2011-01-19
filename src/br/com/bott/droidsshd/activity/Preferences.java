@@ -44,9 +44,9 @@ public class Preferences extends PreferenceActivity
 		mAuthorizedKeys = findPreference("authorized_keys_key");
 		mAuthorizedKeys.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 			public boolean onPreferenceClick(Preference preference) {
-					Intent p = new Intent(getBaseContext(), com.h3r3t1c.filechooser.FileChooser.class);
-					startActivityForResult(p, R.string.activity_file_chooser);
-					return true;
+				Intent p = new Intent(getBaseContext(), com.h3r3t1c.filechooser.FileChooser.class);
+				startActivityForResult(p, R.string.activity_file_chooser);
+				return true;
 			}
 		});
 	}
