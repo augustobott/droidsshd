@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
 	package="br.com.bott.droidsshd"
-<<<<<<< HEAD
-	android:versionCode="5"
-	android:versionName="0.5" android:installLocation="internalOnly">
-=======
-	android:installLocation="auto" android:versionName="0.6" android:versionCode="6">
->>>>>>> refs/heads/work
-
+	android:installLocation="auto"
+	android:versionName="0.6"
+	android:versionCode="6">
 	<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 	<uses-permission android:name="android.permission.WAKE_LOCK" />
