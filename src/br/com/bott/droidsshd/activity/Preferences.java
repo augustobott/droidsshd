@@ -45,6 +45,8 @@ public class Preferences extends PreferenceActivity
 		mAuthorizedKeys.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 			public boolean onPreferenceClick(Preference preference) {
 				Intent p = new Intent(getBaseContext(), com.h3r3t1c.filechooser.FileChooser.class);
+				p.putExtra("path", "/sdcard/");
+//				p.putExtra("path", "/mnt");
 				startActivityForResult(p, R.string.activity_file_chooser);
 				return true;
 			}
