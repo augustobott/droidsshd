@@ -15,7 +15,7 @@
 <!--	<uses-permission android:name="android.permission.READ_PHONE_STATE" />-->
 
 
-	<application android:icon="@drawable/ssh_icon"
+	<application android:icon="@drawable/droidsshd_icon"
 		android:label="@string/app_label"
 		android:persistent="true" android:debuggable="true">
 		<service 

@@ -245,7 +245,7 @@ public class DroidSSHdService extends Service{
 
 	protected void showNotification() {
 		if (Base.isDropbearDaemonNotificationEnabled()) {
-			Notification notifyDetails = new Notification(R.drawable.ssh_icon, getString(R.string.app_label), System.currentTimeMillis());
+			Notification notifyDetails = new Notification(R.drawable.droidsshd_icon, getString(R.string.app_label), System.currentTimeMillis());
 			Intent intent = new Intent();
 			intent.setClass(Base.getContext(), br.com.bott.droidsshd.DroidSSHd.class);
 			intent.setAction(Intent.ACTION_DEFAULT);
